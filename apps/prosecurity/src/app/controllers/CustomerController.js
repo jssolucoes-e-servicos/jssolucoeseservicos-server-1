@@ -74,7 +74,7 @@ router.post('/insert-photo', upload.single('Photo'), async (req, res) => {
             )
             fs.unlinkSync(req.file.path);
         let customer = await Customer.findById(_id);
-        customer.Photo = `https://projetojesus-backend.herokuapp.com/prosecurity/files/${fileName}`;
+        customer.Photo = `https://jssolucoeseservicos.herokuapp.com/prosecurity/files/${fileName}`;
         await customer.save();
         res.send(customer);
     } catch (error) {

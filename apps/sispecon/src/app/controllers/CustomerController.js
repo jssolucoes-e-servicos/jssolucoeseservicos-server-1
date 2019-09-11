@@ -74,7 +74,7 @@ router.post('/insert-photo', upload.single('Photo'), async (req, res) => {
             )
             fs.unlinkSync(req.file.path);
         let customer = await Customer.findById(_id);
-        customer.Photo = `https://sispecon-server.herokuapp.com/sispecon/files/${fileName}`;
+        customer.Photo = `https://jssolucoeseservicos.herokuapp.com/sispecon/files/${fileName}`;
         await customer.save();
         res.send(customer);
     } catch (error) {
