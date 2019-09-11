@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth');
-const Indication = require('../models/v1_Indication');
+const Indication = require('../models/Indication');
 const router = express.Router();
 //router.use(authMiddleware)
 router.post('/', async (req, res) => {

@@ -1,5 +1,5 @@
 const express = require('express');
-const Customer = require('./../models/v2_Customer');
+const Customer = require('./../models/Customer');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const sharp = require('sharp');

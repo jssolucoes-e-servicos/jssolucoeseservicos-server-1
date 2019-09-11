@@ -1,7 +1,7 @@
 const express = require('express');
-const Contributor = require('../models/v1_Contributor');
-const Customer = require('../models/v1_Customer');
-const Panic = require('../models/v1_Panic');
+const Contributor = require('../models/Contributor');
+const Customer = require('../models/Customer');
+const Panic = require('../models/Panic');
 const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
 //router.use(authMiddleware);
