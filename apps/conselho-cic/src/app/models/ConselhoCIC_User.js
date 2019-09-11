@@ -1,15 +1,29 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
 const bcrypt = require('bcryptjs');
-const ContributorSchema = new mongoose.Schema({
+const ConselhoCIC_UserSchema = new mongoose.Schema({
     Name: {
         type: String, 
         required: true 
     },
-    User: {
+    Mail: {
         type: String, 
         required: false,
         unique: true,
+        lowercase:true
+    },
+    Phone: {
+        type: String, 
+        required: true,
+        unique: true,
+    },
+    InPanic:{
+        type: String, 
+        default: 'false',
+    },
+    Leader:{
+        type: String, 
+        default: 'false',
     },
     Password: {
         type: String, 
@@ -24,15 +38,19 @@ const ContributorSchema = new mongoose.Schema({
         type: Date,
         select: false 
     },
+    IsMaster: {
+        type: String,
+        default: 'false'
+    },
     Photo: {
         type: String,
     }
 });
-ContributorSchema.pre('save', async function(next){
+ConselhoCIC_UserSchema.pre('save', async function(next){
    const hash = await bcrypt.hash(this.Password, 10);
    this.Password = hash;
    next(); 
 }, { timestamps: true });
-ContributorSchema.plugin(mongoosePaginate);
-const Contributor = mongoose.model('Contributor', ContributorSchema);
-module.exports = Contributor;
+ConselhoCIC_UserSchema.plugin(mongoosePaginate);
+const ConselhoCIC_User = mongoose.model('ConselhoCIC_User', ConselhoCIC_UserSchema);
+module.exports = ConselhoCIC_User;

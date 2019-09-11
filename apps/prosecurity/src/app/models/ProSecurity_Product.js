@@ -1,6 +1,6 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
-const ProductSchema = new mongoose.Schema({
+const ProSecurity_ProductSchema = new mongoose.Schema({
     Name: {
         type: String, 
         required: false
@@ -10,6 +10,6 @@ const ProductSchema = new mongoose.Schema({
         required: false
     },
 }, { timestamps: true });
-ProductSchema.plugin(mongoosePaginate);
-const Product = mongoose.model('Product', ProductSchema);
-module.exports = Product;
+ProSecurity_ProductSchema.plugin(mongoosePaginate);
+const ProSecurity_Product = mongoose.model('ProSecurity_Product', ProSecurity_ProductSchema);
+module.exports = ProSecurity_Product;

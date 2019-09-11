@@ -1,6 +1,6 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
-const GroupSchema = new mongoose.Schema({
+const ConselhoCIC_GroupSchema = new mongoose.Schema({
     Name: {
         type: String, 
         required: true 
@@ -12,7 +12,7 @@ const GroupSchema = new mongoose.Schema({
     Members: [{
        User: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "ConselhoCIC_User",
         },
         IsAdmin: {
             type: String, 
@@ -20,6 +20,6 @@ const GroupSchema = new mongoose.Schema({
         },
     }]
 }, { timestamps: true });
-GroupSchema.plugin(mongoosePaginate);
-const Group = mongoose.model('Group', GroupSchema);
-module.exports = Group;
+ConselhoCIC_GroupSchema.plugin(mongoosePaginate);
+const ConselhoCIC_Group = mongoose.model('ConselhoCIC_Group', ConselhoCIC_GroupSchema);
+module.exports = ConselhoCIC_Group;

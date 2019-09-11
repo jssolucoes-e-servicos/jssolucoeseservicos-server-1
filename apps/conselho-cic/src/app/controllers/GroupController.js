@@ -1,5 +1,5 @@
 const express = require('express');
-const Group = require('./../models/Group');
+const Group = require('./../models/ConselhoCIC_Group');
 const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
 router.use(authMiddleware);

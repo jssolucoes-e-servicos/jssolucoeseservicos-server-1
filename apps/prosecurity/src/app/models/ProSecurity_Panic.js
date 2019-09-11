@@ -1,14 +1,14 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
-const PanicSchema = new mongoose.Schema({
+const ProSecurity_PanicSchema = new mongoose.Schema({
     UserRequest: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Customer",
         required: true,
     },
     UserResponse: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Contributor",
         required: false,
     },
     Ocorrency:{
@@ -31,7 +31,8 @@ const PanicSchema = new mongoose.Schema({
         type: String, 
         default:'false'
     },
+    CreatedAt: { type: Date, default: Date.now }
 }, { timestamps: true });
-PanicSchema.plugin(mongoosePaginate);
-const Panic = mongoose.model('Panic', PanicSchema);
-module.exports = Panic;
+ProSecurity_PanicSchema.plugin(mongoosePaginate);
+const ProSecurity_Panic = mongoose.model('ProSecurity_Panic', ProSecurity_PanicSchema);
+module.exports = ProSecurity_Panic;

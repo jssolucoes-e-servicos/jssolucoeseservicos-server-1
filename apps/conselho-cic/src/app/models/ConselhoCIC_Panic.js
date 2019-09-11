@@ -1,14 +1,14 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
-const PanicSchema = new mongoose.Schema({
+const ConselhoCIC_PanicSchema = new mongoose.Schema({
     UserRequest: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Customer",
+        ref: "ConselhoCIC_User",
         required: true,
     },
     UserResponse: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Contributor",
+        ref: "ConselhoCIC_User",
         required: false,
     },
     Ocorrency:{
@@ -32,6 +32,6 @@ const PanicSchema = new mongoose.Schema({
         default:'false'
     },
 }, { timestamps: true });
-PanicSchema.plugin(mongoosePaginate);
-const Panic = mongoose.model('anic', PanicSchema);
-module.exports = Panic;
+ConselhoCIC_PanicSchema.plugin(mongoosePaginate);
+const ConselhoCIC_Panic = mongoose.model('ConselhoCIC_Panic', ConselhoCIC_PanicSchema);
+module.exports = ConselhoCIC_Panic;

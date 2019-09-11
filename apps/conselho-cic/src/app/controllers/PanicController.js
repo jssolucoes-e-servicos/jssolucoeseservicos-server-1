@@ -1,6 +1,6 @@
 const express = require('express');
-const User = require('../models/User');
-const Panic = require('../models/Panic');
+const User = require('../models/ConselhoCIC_User');
+const Panic = require('../models/ConselhoCIC_Panic');
 const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
 router.use(authMiddleware);

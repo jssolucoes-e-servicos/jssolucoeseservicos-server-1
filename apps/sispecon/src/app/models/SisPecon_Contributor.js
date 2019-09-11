@@ -1,7 +1,7 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
 const bcrypt = require('bcryptjs');
-const ContributorSchema = new mongoose.Schema({
+const SisPecon_ContributorSchema = new mongoose.Schema({
     Name: {
         type: String, 
         required: true 
@@ -28,11 +28,11 @@ const ContributorSchema = new mongoose.Schema({
         type: String,
     }
 });
-ContributorSchema.pre('save', async function(next){
+SisPecon_ContributorSchema.pre('save', async function(next){
    const hash = await bcrypt.hash(this.Password, 10);
    this.Password = hash;
    next(); 
 }, { timestamps: true });
-ContributorSchema.plugin(mongoosePaginate);
-const Contributor = mongoose.model('Contributor', ContributorSchema);
-module.exports = Contributor;
+SisPecon_ContributorSchema.plugin(mongoosePaginate);
+const SisPecon_Contributor = mongoose.model('SisPecon_Contributor', SisPecon_ContributorSchema);
+module.exports = SisPecon_Contributor;

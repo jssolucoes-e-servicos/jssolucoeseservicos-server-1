@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
-const IndicationSchema = new mongoose.Schema(
+const ProSecurity_IndicationSchema = new mongoose.Schema(
     {
         Visualized:{
             type: String,
             default: 'false'
         },
         User: {
-            type: mongoose.Schema.Types.ObjectId, ref: "Customer" 
+            type: mongoose.Schema.Types.ObjectId, ref: "ProSecurity_Customer" 
         },
         Product: {
-            type: mongoose.Schema.Types.ObjectId, ref: "Product" 
+            type: mongoose.Schema.Types.ObjectId, ref: "ProSecurity_Product" 
         },
         Name:{
             type: String,
@@ -25,5 +25,5 @@ const IndicationSchema = new mongoose.Schema(
             required: true,
         },
 }, { timestamps: true });
-IndicationSchema.plugin(mongoosePaginate);
-module.exports = mongoose.model('Indication', IndicationSchema);
+ProSecurity_IndicationSchema.plugin(mongoosePaginate);
+module.exports = mongoose.model('ProSecurity_Indication', ProSecurity_IndicationSchema);

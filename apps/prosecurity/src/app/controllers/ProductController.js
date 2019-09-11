@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middlewares/auth');
-const Product = require('../models/Product');
+const Product = require('../models/ProSecurity_Product');
 const router = express.Router();
 //router.use(authMiddleware)
 router.post('/', async (req, res) => {

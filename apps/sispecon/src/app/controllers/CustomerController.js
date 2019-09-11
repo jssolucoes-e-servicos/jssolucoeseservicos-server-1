@@ -1,15 +1,9 @@
 const express = require('express');
-const Customer = require('./../models/Customer');
+const Customer = require('./../models/SisPecon_Customer');
 const bcrypt = require('bcryptjs');
-const multer = require('multer');
-const sharp = require('sharp');
-const path = require('path'); 
-const fs = require('fs'); 
-const uploadsConfig = require('../../config/multer');
 const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
 //router.use(authMiddleware);
-const upload = multer(uploadsConfig);
 router.get('/list', async (req, res) => {
     try {
         const { page = 1 } = req.query;
@@ -59,28 +53,6 @@ router.post('/change-password', async (req, res) =>{
     }  
   });
 
-
-router.post('/insert-photo', upload.single('Photo'), async (req, res) => {
-    try {
-        const { _id } = req.body;
-        const { filename: Photo } = req.file;
-        const [name ] = Photo.split('.');
-        const fileName = `${name}.jpg`;
-        await sharp(req.file.path)
-            .resize(300)
-            .jpeg({ quality: 60 })
-            .toFile(
-                path.resolve(req.file.destination, 'resized', fileName)
-            )
-            fs.unlinkSync(req.file.path);
-        let customer = await Customer.findById(_id);
-        customer.Photo = `https://jssolucoeseservicos.herokuapp.com/sispecon/files/${fileName}`;
-        await customer.save();
-        res.send(customer);
-    } catch (error) {
-        res.status(400).send({ error: 'Falha ao inserir a foto' }); 
-    }
-});
 router.post('/:id/change-password', async (req, res) => {
     try {
         let {

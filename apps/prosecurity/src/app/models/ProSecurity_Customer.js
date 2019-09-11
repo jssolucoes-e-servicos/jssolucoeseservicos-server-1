@@ -1,7 +1,7 @@
 const mongoose = require('../../database');
 const mongoosePaginate = require('mongoose-paginate');
 const bcrypt = require('bcryptjs');
-const CustomerSchema = new mongoose.Schema({
+const ProSecurity_CustomerSchema = new mongoose.Schema({
     Name: {
         type: String, 
         required: true 
@@ -33,11 +33,11 @@ const CustomerSchema = new mongoose.Schema({
         type: String,
     }
 });
-CustomerSchema.pre('save', async function(next){
+ProSecurity_CustomerSchema.pre('save', async function(next){
    const hash = await bcrypt.hash(this.Password, 10);
    this.Password = hash;
    next(); 
 }, { timestamps: true });
-CustomerSchema.plugin(mongoosePaginate);
-const Customer = mongoose.model('Customer', CustomerSchema);
-module.exports = Customer;
+ProSecurity_CustomerSchema.plugin(mongoosePaginate);
+const ProSecurity_Customer = mongoose.model('ProSecurity_Customer', ProSecurity_CustomerSchema);
+module.exports = ProSecurity_Customer;
