@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //Injeção dos Controllers
 // CONSELHO CIC
-require('./apps/prosecurity/src/app/controllers/index')(app); 
+//require('./apps/prosecurity/src/app/controllers/index')(app); 
 // SISPECON
 require('./apps/sispecon/src/app/controllers/index')(app);
 // PRO SECURITY
