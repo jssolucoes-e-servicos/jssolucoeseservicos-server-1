@@ -4,7 +4,6 @@ const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authConfig = require('./../../config/auth');
-const mailer = require('../../modules/mailer');
 const router = express.Router();
 
 router.post('/store', async (req, res) => {
@@ -40,36 +39,6 @@ router.post('/authenticate', async (req, res) => {
     };
     console.log(result);
     return res.send( result ); 
-});
-
-router.post('/forgot-password', async (req, res) =>{
-    const { Mail } = req.body;
-    try {
-        const user = Customer.findOne( { Mail } );
-        if (!user)
-            res.status(400).send({ error : 'Usuário não encontrado!' }); 
-        const token = crypto.randomBytes(20).toString('hex');
-        const now = new Date();
-        now.setHours(now.getHours() + 1);
-        await User.findByIdAndUpdate(user.id, {
-           '$set': {
-                PasswordResetToken: token,
-                PasswordResetExpires: now
-           } 
-        });
-        let mail = await mailer.sendMail({
-            to: Email,
-            from: 'no-replay@apps.jssolucoeseservicos.com.br',
-            template: 'auth/forgot_password',
-            context: { token }
-        }, (err) => {
-            if (err)
-                return res.status(400).send({ error: 'Cannot send forgot password email'});
-            return res.send();
-        });
-    } catch (err){
-        res.status(400).send({ error : 'Error on forgot password, try again' });
-    }
 });
 
 module.exports = app => app.use('/conselho-cic/auth', router);
