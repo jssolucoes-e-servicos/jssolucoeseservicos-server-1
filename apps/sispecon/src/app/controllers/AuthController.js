@@ -24,22 +24,22 @@ router.post('/contributor/register', async (req, res) => {
     console.log(req.body);
     try {
         if ( await Contributor.findOne( { User }))
-            return res.status(400).send({ error: "Cliente já cadastrado" });
+            return res.status(401).send({ error: "Cliente já cadastrado" });
         const contributor = await Contributor.create(req.body);
         contributor.Password = undefined;  
         return res.send(contributor);
     } catch(err) {
         console.log(err);
-        res.status(400).send({ error : "Falha ao cadastrar usuário" });
+        res.status(401).send({ error : "Falha ao cadastrar usuário" });
     }
 });
 router.post('/customer/authenticate', async (req, res) => {
     const { Email, Password } = req.body;
     const customer = await Customer.findOne({ Email }).select('+Password');
     if(!customer)
-        return res.status(400).send({ "error" : "Cliente não encontrado!"}); 
+        return res.status(401).send({ "error" : "Cliente não encontrado!"}); 
     if(!await bcrypt.compare(Password, customer.Password))
-        return res.status(400).send({ "error" : "Accesso negado!"});
+        return res.status(401).send({ "error" : "Accesso negado!"});
     customer.Password = undefined;
     const token = jwt.sign({ id: customer._id }, authConfig.secret, {
         expiresIn: 86400,
@@ -58,9 +58,9 @@ router.post('/contributor/authenticate', async (req, res) => {
     const { User, Password } = req.body;
     const contributor = await Contributor.findOne({ User }).select('+Password');
     if(!contributor)
-        return res.status(400).send({ "error" : "Colaborador não encontrado!"}); 
+        return res.status(401).send({ "error" : "Colaborador não encontrado!"}); 
     if(!await bcrypt.compare(Password, contributor.Password))
-        return res.status(400).send({ "error" : "Accesso negado!"});
+        return res.status(401).send({ "error" : "Accesso negado!"});
     contributor.Password = undefined;
     const token = jwt.sign({ id: contributor._id }, authConfig.secret, {
         expiresIn: 86400,
