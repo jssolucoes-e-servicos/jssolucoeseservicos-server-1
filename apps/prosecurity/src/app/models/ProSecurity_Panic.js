@@ -3,12 +3,12 @@ const mongoosePaginate = require('mongoose-paginate');
 const ProSecurity_PanicSchema = new mongoose.Schema({
     UserRequest: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Customer",
+        ref: "ProSecurity_Customer",
         required: true,
     },
     UserResponse: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Contributor",
+        ref: "ProSecurity_Contributor",
         required: false,
     },
     Ocorrency:{
